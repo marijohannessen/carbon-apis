@@ -1,0 +1,27 @@
+{
+  "name": "carbon-apis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellobrian/carbon-apis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hellobrian/carbon-apis/issues"
+  },
+  "homepage": "https://github.com/hellobrian/carbon-apis#readme",
+  "dependencies": {
+    "compression": "^1.6.2",
+    "express": "^4.15.3",
+    "next": "^2.4.4"
+  }
+}
