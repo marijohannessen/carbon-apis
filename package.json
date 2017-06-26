@@ -2,10 +2,10 @@
   "name": "carbon-apis",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "bin/www.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "NODE_ENV=production node server.js"
+    "dev": "nodemon bin/www.js",
+    "start": "NODE_ENV=production node bin/www.js"
   },
   "repository": {
     "type": "git",

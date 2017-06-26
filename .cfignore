@@ -1,0 +1,4 @@
+.git
+.vscode
+credentials.json
+node_modules

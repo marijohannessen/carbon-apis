@@ -4,8 +4,6 @@ const compression = require('compression');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-const port = process.env.PORT || 8080;
 const app = express();
 
 app.use(compression());
@@ -13,8 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const Icon = require('./models/icon');
-
-console.log(process.env.MONGO_USER, process.env.MONGO_PASS, process.env.NODE_ENV);
 
 mongoose.connect(
   `mongodb://${process.env.MONGO_USER}:${process.env
@@ -28,13 +24,32 @@ mongoose.connect(
   }
 );
 
-app.get('/api/icons', (req, res) => {
-  const icons = Icon.find().exec((err, icons) => {
-    res.json(icons);
-  });
+app.get('/', (req, res) => {
+  res.redirect('/icons');
 });
 
-app.post('/api/icons', (req, res) => {
+app.get('/icons', (req, res) => {
+  const query = Object.keys(req.query).join('');
+  switch (query) {
+    case 'name':
+      Icon.findOne({ name: req.query.name }).exec((err, icon) => {
+        res.json(icon);
+      });
+      break;
+    case 'id':
+      Icon.findOne({ _id: req.query.id }).exec((err, icon) => {
+        res.json(icon);
+      });
+      break;
+    default:
+      Icon.find().sort({ name: 1 }).exec((err, icons) => {
+        res.json(icons);
+      });
+      break;
+  }
+});
+
+app.post('/icons', (req, res) => {
   const icon = new Icon({
     name: req.body.name,
     tags: req.body.tags,
@@ -54,7 +69,4 @@ app.post('/api/icons', (req, res) => {
   });
 });
 
-app.listen(port, err => {
-  if (err) throw err;
-  console.log(`> Express: Ready on port ${port}`);
-});
+module.exports = app;
