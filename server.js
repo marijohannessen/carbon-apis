@@ -3,6 +3,7 @@ require('dotenv').config();
 const compression = require('compression');
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -24,11 +25,11 @@ mongoose.connect(
   }
 );
 
-app.get('/', (req, res) => {
+app.get('/', cors(), (req, res) => {
   res.redirect('/icons');
 });
 
-app.get('/icons', (req, res) => {
+app.get('/icons', cors(), (req, res) => {
   const query = Object.keys(req.query).join('');
   switch (query) {
     case 'name':
