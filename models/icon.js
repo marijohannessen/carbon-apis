@@ -7,6 +7,7 @@ const IconSchema = new Schema({
     unique: true,
     trim: true,
     lowercase: true,
+    required: true,
   },
   tags: [String],
   width: {
@@ -27,6 +28,7 @@ const IconSchema = new Schema({
     required: true,
   },
   url: String,
+  svgString: String,
 });
 
 module.exports = mongoose.model('Icon', IconSchema);

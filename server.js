@@ -29,11 +29,46 @@ app.get('/', cors(), (req, res) => {
   res.redirect('/icons');
 });
 
+app.get('/icons/:icon_id', (req, res) => {
+  Icon.findById(req.params.icon_id, (err, icon) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(icon);
+  });
+});
+
+app.patch('/icons/:icon_id', (req, res) => {
+  switch (req.query.tags) {
+    case 'add':
+      Icon.findById(req.params.icon_id, (err, icon) => {
+        const tags = req.body.tags.concat(icon.tags);
+        const uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+        const newData = { tags: uniqueTags };
+        Icon.update({ _id: req.params.icon_id }, { $set: newData }, (err, icon) => {
+          res.json(icon);
+        });
+      });
+      break;
+    case undefined:
+      Icon.findByIdAndUpdate(
+        req.params.icon_id,
+        { $set: req.body },
+        { new: true },
+        (err, icon) => {
+          if (err) res.send(err);
+          res.json(icon);
+        }
+      );
+      break;
+  }
+});
+
 app.get('/icons', cors(), (req, res) => {
   const query = Object.keys(req.query).join('');
   switch (query) {
     case 'name':
-      Icon.findOne({ name: req.query.name }).exec((err, icon) => {
+      Icon.findOne({ name: req.query.icon_name }).exec((err, icon) => {
         res.json(icon);
       });
       break;
