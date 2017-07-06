@@ -1,6 +1,8 @@
 # Carbon APIs
 
-## Icon Schema
+## Icons
+
+### Schema
 
 | Field name | Type      | Required |
 |------------|-----------|----------|
@@ -15,7 +17,7 @@
 | _id        | ObjectId  |          |
 | __v        | Number    |          |
 
-## Icon API Routes
+### API
 
 | Method | Path              | Query                                                   | Description           | Cors |
 |--------|-------------------|---------------------------------------------------------|-----------------------|------|
