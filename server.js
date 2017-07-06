@@ -68,13 +68,19 @@ app.get('/icons', cors(), (req, res) => {
   const query = Object.keys(req.query).join('');
   switch (query) {
     case 'name':
-      Icon.findOne({ name: req.query.icon_name }).exec((err, icon) => {
+      Icon.findOne({ name: req.query.name }).exec((err, icon) => {
+        console.log();
         res.json(icon);
       });
       break;
     case 'id':
       Icon.findOne({ _id: req.query.id }).exec((err, icon) => {
         res.json(icon);
+      });
+      break;
+    case 'tags':
+      Icon.find({ 'tags': req.query.tags}).exec((err, icons) => {
+        res.json(icons);
       });
       break;
     default:
