@@ -24,6 +24,7 @@
 | GET    | `/icons`          | `?name=ICON_NAME`: return single icon by name           | Return all icons      | true |
 | GET    | `/icons`          | `?tag=ICON_TAG`: return all icons by tag                | Return all icons      | true |
 | GET    | `/icons/:icon_id` |                                                         | Return one icon by id | true |
+| DELETE | `/icons/:icon_id` |                                                         | Delete one icon by id |      |
 | POST   | `/icons`          |                                                         | Add a new icon        |      |
 | PATCH  | `/icons/:icon_id` | `?tags=add`: update tags array with new + existing tags | Update one icon by id |      |
 

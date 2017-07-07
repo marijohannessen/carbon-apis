@@ -38,6 +38,13 @@ app.get('/icons/:icon_id', (req, res) => {
   });
 });
 
+app.delete('/icons/:icon_id', (req, res) => {
+  Icon.findByIdAndRemove(req.params.icon_id, (err, icon) => {
+    if (err) res.send(err);
+    res.json(icon);
+  })
+})
+
 app.patch('/icons/:icon_id', (req, res) => {
   switch (req.query.tags) {
     case 'add':
